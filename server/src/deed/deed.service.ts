@@ -6,16 +6,21 @@ import { Deed, DeedDocument } from './schemas/deed.schema';
 import { Comment, CommentDocument } from './schemas/comment.schema';
 import { CreateDeedDto, UpdateDeedDto } from './dto/deed.dto';
 import { CreateCommentDto } from './dto/comment.dto';
+import { User, UserDocument } from '../user/user.schema';
 
 @Injectable()
 export class DeedService {
   constructor(
     @InjectModel(Deed.name) private deedModel: Model<DeedDocument>,
     @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
   ) {}
 
   async create(dto: CreateDeedDto): Promise<Deed> {
-    const deed = await this.deedModel.create({ ...dto });
+    const deed = await this.deedModel.create({ ...dto, isDone: false });
+    const author = await this.userModel.findById(dto.authorId)
+    author.deedList.push(deed._id)
+    await author.save()
     return deed;
   }
   async update(dto: UpdateDeedDto): Promise<Deed> {
@@ -37,7 +42,7 @@ export class DeedService {
   }
 
   async getAll(): Promise<Deed[]> {
-    const deeds = await this.deedModel.find();
+    const deeds = await this.deedModel.find().populate('authorId');
     return deeds;
   }
 

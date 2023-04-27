@@ -9,17 +9,14 @@ export type DeedDocument = Deed & Document;
 
 @Schema()
 export class Deed {
-  @Prop()
+  @Prop({ required: true })
   text: string;
 
-  @Prop()
+  @Prop({ required: true })
   isDone: boolean;
 
-  // @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'User' }] })
-  // authorId: User;
-
-  @Prop()
-  author: string;
+  @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'User' }] })
+  authorId: User;
 
   @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'Comment' }] })
   comments: Comment[];

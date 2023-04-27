@@ -7,10 +7,10 @@ export type CommentDocument = Comment & Document;
 
 @Schema()
 export class Comment {
-  @Prop()
+  @Prop({ required: true })
   text: string;
 
-  @Prop()
+  @Prop({ required: true })
   author: string;
 
   @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'Deed' }] })

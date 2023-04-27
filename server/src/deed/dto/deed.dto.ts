@@ -1,8 +1,7 @@
 import { ObjectId } from "mongoose";
 
 export class CreateDeedDto {
-    readonly isDone: boolean;
-    readonly author: string;
+    readonly authorId: ObjectId;
     readonly text: string;
 }
 
