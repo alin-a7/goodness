@@ -18,16 +18,16 @@ export class DeedService {
 
   async create(dto: CreateDeedDto): Promise<Deed> {
     const deed = await this.deedModel.create({ ...dto, isDone: false });
-    const author = await this.userModel.findById(dto.authorId)
-    author.deedList.push(deed._id)
-    await author.save()
+    const author = await this.userModel.findById(dto.authorId);
+    author.deedList.push(deed._id);
+    await author.save();
     return deed;
   }
   async update(dto: UpdateDeedDto): Promise<Deed> {
     const deed = await this.deedModel.findById(dto.deedId);
-    deed.text = dto.text
-    deed.isDone = dto.isDone
-    await deed.save()
+    deed.text = dto.text;
+    deed.isDone = dto.isDone;
+    await deed.save();
     return deed;
   }
 
@@ -48,9 +48,9 @@ export class DeedService {
 
   async addComment(dto: CreateCommentDto): Promise<Comment> {
     const deed = await this.deedModel.findById(dto.deedId);
-    const comment = await this.commentModel.create({...dto})
-    deed.comments.push(comment._id)
+    const comment = await this.commentModel.create({ ...dto });
+    deed.comments.push(comment._id);
     await deed.save();
     return comment;
-}
+  }
 }

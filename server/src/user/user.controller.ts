@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ObjectId } from 'mongoose';
 
 import { UserService } from './user.service';
@@ -7,7 +15,7 @@ import { AddFriendDto, CreateUserDto, UpdateUserDto } from './dto/user.dto';
 @Controller('/user')
 export class UserController {
   constructor(private userService: UserService) {}
-  
+
   @Post()
   create(@Body() dto: CreateUserDto) {
     return this.userService.create(dto);

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import * as mongosse from 'mongoose'
+import * as mongosse from 'mongoose';
 
 import { User } from 'src/user/user.schema';
 import { Comment } from './comment.schema';
@@ -20,7 +20,6 @@ export class Deed {
 
   @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'Comment' }] })
   comments: Comment[];
-
 }
 
 export const DeedSchema = SchemaFactory.createForClass(Deed);

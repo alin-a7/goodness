@@ -1,7 +1,7 @@
-import { ObjectId } from "mongoose";
+import { ObjectId } from 'mongoose';
 
 export class CreateCommentDto {
-    readonly author: string;
-    readonly text: string;
-    readonly deedId: ObjectId
+  readonly author: string;
+  readonly text: string;
+  readonly deedId: ObjectId;
 }
