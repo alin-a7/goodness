@@ -1,9 +1,9 @@
-import Layout from '@/components/Layout';
+import Layout from "@/components/Layout";
 
 const Index = () => {
   return (
     <Layout>
-      <div>Home</div>
+      <div>Profile</div>
     </Layout>
   );
 }

@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 25px;
+
+  background-color: rgb(23, 14, 36);
+  font-size: 22px;
+
+  position: relative;
+  bottom: 0;
+
+  & > a {
+    color: white;
+
+    &:hover {
+      color: #f0e14a;
+      scale: 1.05;
+    }
+  }
+}
+
+.logo {
+  width: 150px;
+  height: 50px;
+}
