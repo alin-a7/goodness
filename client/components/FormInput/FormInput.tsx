@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { InputsProps } from "@/types/component";
+
+import { InputsProps } from "@/api";
 
 import styles from "./FormInput.module.scss";
 

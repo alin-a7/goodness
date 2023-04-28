@@ -1,13 +1,15 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-import FormInput from "@/components/FormInput/FormInput";
+import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
-import { RegistrationFormState } from "@/types/component";
+import { RegistrationFormState, createUser } from "@/api";
 
 import styles from "./Registration.module.scss";
 
 const Registration = () => {
+  const { push } = useRouter();
   const {
     register,
     handleSubmit,
@@ -16,9 +18,10 @@ const Registration = () => {
     mode: "onBlur",
   });
 
-  const formSubmit = (data: RegistrationFormState) => {
-    console.log(data);
-
+  const formSubmit = async (data: RegistrationFormState) => {
+    const user = await createUser(data)
+    console.log(user._id);
+    push("/");
   };
 
   return (
@@ -44,10 +47,10 @@ const Registration = () => {
             type="password"
             placeholder="Enter your password"
           />
+          <button type="submit" className={styles.button}>
+            Submit!
+          </button>
         </form>
-        <button type="submit" className={styles.button}>
-          Submit!
-        </button>
 
         <h2>
           or <Link href="/login"> Log in</Link>

@@ -1,17 +1,15 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import FormInput from "@/components/FormInput/FormInput";
+import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
+import { Error, LoginFormState, User, loginUser } from "@/api";
 
 import styles from "./Login.module.scss";
 
-export interface LoginFormState {
-  email: string;
-  password: string;
-}
-
 const Login = () => {
+  const { push } = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -20,8 +18,14 @@ const Login = () => {
     mode: "onBlur",
   });
 
-  const formSubmit = (data: LoginFormState) => {
-    console.log(data);
+  const formSubmit = async (data: LoginFormState) => {
+    const { status, result } = await loginUser(data);
+    if (status === 201) {
+      console.log((result as User)._id);
+      push("/");
+    } else {
+      console.log((result as Error).message);
+    }
   };
 
   return (
@@ -41,10 +45,10 @@ const Login = () => {
             type="password"
             placeholder="Enter your password"
           />
+          <button type="submit" className={styles.button}>
+            Submit!
+          </button>
         </form>
-        <button type="submit" className={styles.button}>
-          Submit!
-        </button>
       </div>
     </Layout>
   );

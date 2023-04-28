@@ -1,11 +1,35 @@
 import Layout from "@/components/Layout";
+import {
+  getAllUser,
+  getRunningQueriesThunk,
+  useGetAllUserQuery,
+} from "@/store/api/userApi";
+import { wrapper } from "@/store/store";
+import { useRouter } from "next/router";
 
-const Index = () => {
+const UsersPage = () => {
+  const router = useRouter();
+  const { data: users } = useGetAllUserQuery();
   return (
     <Layout>
-      <div>Users</div>
+      {router.isFallback ? (
+        <div>Loading...</div>
+      ) : (
+        users?.map((user, index) => <div key={user.email}>{user.name}</div>)
+      )}
     </Layout>
   );
-}
+};
 
-export default Index
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    store.dispatch(getAllUser.initiate());
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
+
+    return {
+      props: {},
+    };
+  }
+);
+
+export default UsersPage;
