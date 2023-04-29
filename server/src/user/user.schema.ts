@@ -17,8 +17,8 @@ export class User {
   @Prop({ required: true })
   password: string;
 
-  @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'User' }] })
-  friends: User[];
+  @Prop()
+  friends: mongosse.ObjectId[];
 
   @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'Deed' }] })
   deedList: Deed[];

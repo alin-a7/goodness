@@ -37,7 +37,10 @@ export class DeedService {
   }
 
   async getOne(id: ObjectId): Promise<Deed> {
-    const deed = await this.deedModel.findById(id).populate('comments');
+    const deed = await this.deedModel
+      .findById(id)
+      .populate('comments')
+      .populate('authorId');
     return deed;
   }
 

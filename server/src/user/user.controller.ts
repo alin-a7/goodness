@@ -10,7 +10,11 @@ import {
 import { ObjectId } from 'mongoose';
 
 import { UserService } from './user.service';
-import { AddFriendDto, CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import {
+  CreateUserDto,
+  FollowAndUnfollowDto,
+  UpdateUserDto,
+} from './dto/user.dto';
 
 @Controller('/user')
 export class UserController {
@@ -47,7 +51,7 @@ export class UserController {
   }
 
   @Post('/friend')
-  addFriend(@Body() dto: AddFriendDto) {
-    return this.userService.addFriend(dto);
+  followAndUnfollow(@Body() dto: FollowAndUnfollowDto) {
+    return this.userService.followAndUnfollow(dto);
   }
 }

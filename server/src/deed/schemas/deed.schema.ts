@@ -4,6 +4,7 @@ import * as mongosse from 'mongoose';
 
 import { User } from 'src/user/user.schema';
 import { Comment } from './comment.schema';
+import { type } from 'os';
 
 export type DeedDocument = Deed & Document;
 

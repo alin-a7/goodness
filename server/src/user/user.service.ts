@@ -3,7 +3,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 
 import { User, UserDocument } from './user.schema';
-import { AddFriendDto, CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import {
+  FollowAndUnfollowDto,
+  CreateUserDto,
+  UpdateUserDto,
+} from './dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -34,7 +38,10 @@ export class UserService {
   }
 
   async getAll(): Promise<User[]> {
-    const users = await this.userModel.find();
+    const users = await this.userModel
+      .find()
+      .populate('deedList')
+      .populate('friends');
     return users;
   }
 
@@ -44,14 +51,19 @@ export class UserService {
     await user.save();
   }
 
-  async addFriend(dto: AddFriendDto): Promise<User> {
+  async followAndUnfollow(dto: FollowAndUnfollowDto): Promise<User> {
     const friend = await this.userModel.findById(dto.friendId);
     const me = await this.userModel.findById(dto.myId);
 
     if (!me.friends.includes(friend._id)) {
-      me.friends.push(friend._id);
-      await me.save();
+      me.friends = [...me.friends, friend._id];
+    } else {
+      const newFriends = me.friends.filter(
+        (myFriend) => myFriend.toString() !== friend._id.toString(),
+      );
+      me.friends = [...newFriends];
     }
+    await me.save();
 
     return me;
   }

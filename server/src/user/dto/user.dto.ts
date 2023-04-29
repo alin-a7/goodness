@@ -15,7 +15,7 @@ export class UpdateUserDto {
   readonly userId: ObjectId;
 }
 
-export class AddFriendDto {
+export class FollowAndUnfollowDto {
   readonly myId: ObjectId;
   readonly friendId: ObjectId;
 }
