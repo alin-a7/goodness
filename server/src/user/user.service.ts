@@ -7,6 +7,7 @@ import {
   FollowAndUnfollowDto,
   CreateUserDto,
   UpdateUserDto,
+  RatingDto,
 } from './dto/user.dto';
 
 @Injectable()
@@ -45,10 +46,12 @@ export class UserService {
     return users;
   }
 
-  async ratingUpgrade(id: ObjectId) {
-    const user = await this.userModel.findById(id);
-    user.rate += 1;
+  async ratingUpgrade(dto: RatingDto) {
+    const user = await this.userModel.findById(dto.id);
+    dto.increase ? (user.rate += 1) : (user.rate -= 1);
     await user.save();
+    
+    return user
   }
 
   async followAndUnfollow(dto: FollowAndUnfollowDto): Promise<User> {

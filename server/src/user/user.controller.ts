@@ -13,6 +13,7 @@ import { UserService } from './user.service';
 import {
   CreateUserDto,
   FollowAndUnfollowDto,
+  RatingDto,
   UpdateUserDto,
 } from './dto/user.dto';
 
@@ -45,9 +46,9 @@ export class UserController {
     return this.userService.getAll();
   }
 
-  @Patch(':id')
-  ratingUpgrade(@Param('id') id: ObjectId) {
-    return this.userService.ratingUpgrade(id);
+  @Patch('/rating')
+  ratingUpgrade(@Body() dto: RatingDto) {
+    return this.userService.ratingUpgrade(dto);
   }
 
   @Post('/friend')

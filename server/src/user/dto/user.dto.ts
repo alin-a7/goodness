@@ -19,3 +19,7 @@ export class FollowAndUnfollowDto {
   readonly myId: ObjectId;
   readonly friendId: ObjectId;
 }
+export class RatingDto {
+  readonly id: ObjectId;
+  readonly increase: boolean;
+}
