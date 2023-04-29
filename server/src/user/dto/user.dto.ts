@@ -12,7 +12,7 @@ export class LoginUserDto {
 
 export class UpdateUserDto {
   readonly name: string;
-  readonly userId: ObjectId;
+  readonly id: ObjectId;
 }
 
 export class FollowAndUnfollowDto {

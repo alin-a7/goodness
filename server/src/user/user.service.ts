@@ -19,7 +19,7 @@ export class UserService {
     return user;
   }
   async update(dto: UpdateUserDto): Promise<User> {
-    const deed = await this.userModel.findById(dto.userId);
+    const deed = await this.userModel.findById(dto.id);
     deed.name = dto.name;
     await deed.save();
     return deed;

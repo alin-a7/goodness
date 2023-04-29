@@ -1,12 +1,12 @@
 import { ObjectId } from 'mongoose';
 
 export class CreateDeedDto {
-  readonly authorId: ObjectId;
+  readonly id: ObjectId;
   readonly text: string;
 }
 
 export class UpdateDeedDto {
   readonly isDone: boolean;
   readonly text: string;
-  readonly deedId: ObjectId;
+  readonly id: ObjectId;
 }
