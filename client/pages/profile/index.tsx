@@ -1,16 +1,14 @@
 import Layout from "@/components/Layout";
-import { useGetUserQuery } from "@/store/api/userApi";
 import { useAppSelector } from "@/store/hooks";
 
 import styles from "./ProfilePage.module.scss";
 
 const Profile = () => {
-  const { currentUserId } = useAppSelector((store) => store.app);
-  const { data: currentUser } = useGetUserQuery(currentUserId);
+  const { currentUser } = useAppSelector((store) => store.app);
 
   return (
     <Layout>
-      {currentUserId ? (
+      {currentUser._id ? (
         <>
           <div>Profile</div>
           <h1>{currentUser?.name}</h1>

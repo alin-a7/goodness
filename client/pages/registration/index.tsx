@@ -5,15 +5,15 @@ import { useState } from "react";
 
 import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
-import { RegistrationFormState } from "@/store/types/user";
+import { RegistrationFormState, User } from "@/store/types/user";
 import { useCreateUserMutation } from "@/store/api/userApi";
 import { useActions } from "@/store/hooks";
 
 import styles from "./Registration.module.scss";
 
 const Registration = () => {
-  const { setCurrentUserId } = useActions();
-  setCurrentUserId('')
+  const { setCurrentUser } = useActions();
+  setCurrentUser({} as User);
   const [registrationError, setRegistrationError] = useState("");
   const {
     register,
@@ -31,7 +31,7 @@ const Registration = () => {
     if ("error" in result) {
       setRegistrationError("A user with this email exists");
     } else {
-      setCurrentUserId(result.data._id)
+      setCurrentUser(result.data);
       push("/");
     }
   };

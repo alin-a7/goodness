@@ -6,6 +6,7 @@ import {
   RegistrationFormState,
   UpdateUserDto,
   User,
+  changeFollowDto,
 } from "../types/user";
 
 export const userApi = createApi({
@@ -42,6 +43,14 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    changeFollow: builder.mutation<User, changeFollowDto>({
+      query: (body) => ({
+        url: `/user/friend`,
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: ["User"],
+    }),
     updateUser: builder.mutation<UpdateUserDto, User>({
       query: (user) => ({
         url: `/user`,
@@ -63,6 +72,7 @@ export const userApi = createApi({
 export const {
   useGetUserQuery,
   useGetAllUserQuery,
+  useChangeFollowMutation,
   useCreateUserMutation,
   useDeleteUserMutation,
   useLoginUserMutation,

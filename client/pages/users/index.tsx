@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import Layout from "@/components/Layout";
 import {
   getAllUser,
@@ -5,7 +7,10 @@ import {
   useGetAllUserQuery,
 } from "@/store/api/userApi";
 import { wrapper } from "@/store/store";
-import { useRouter } from "next/router";
+
+import UserCard from "./components/UserCard";
+
+import styles from "./UsersPage.module.scss";
 
 const UsersPage = () => {
   const router = useRouter();
@@ -15,7 +20,11 @@ const UsersPage = () => {
       {router.isFallback ? (
         <div>Loading...</div>
       ) : (
-        users?.map((user) => <div key={user.email}>{user.name}</div>)
+        <div className={styles.cardWrapper}>
+          {users?.map((user) => (
+            <UserCard key={user._id} {...user} />
+          ))}
+        </div>
       )}
     </Layout>
   );

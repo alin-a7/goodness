@@ -3,15 +3,14 @@ import Layout from '@/components/Layout';
 import { useAppSelector } from '@/store/hooks';
 import { useGetUserQuery } from '@/store/api/userApi';
 
-import styles from "./HomePage.module.scss";
+import styles from "../styles/HomePage.module.scss";
 
 const HomePage = () => {
-  const { currentUserId } = useAppSelector((store) => store.app);
-  const { data: currentUser } = useGetUserQuery(currentUserId);
+  const { currentUser } = useAppSelector((store) => store.app);
 
   return (
     <Layout>
-      {currentUserId ? (
+      {currentUser._id ? (
         <>
           <div>Good Deeds</div>
           <h1>{currentUser?.name}</h1>

@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialSatate: { currentUserId: string } = {
-  currentUserId: "",
+import { User } from "../types/user";
+
+const initialSatate: { currentUser: User } = {
+  currentUser: {} as User,
 };
 
 export const appSlice = createSlice({
   name: "app",
   initialState: initialSatate,
   reducers: {
-    setCurrentUserId(state, action: { payload: string }) {
-      state.currentUserId = action.payload;
+    setCurrentUser(state, action: { payload: User }) {
+      state.currentUser = {...action.payload};
     },
   },
 });
 
-export const { setCurrentUserId } = appSlice.actions;
+export const { setCurrentUser } = appSlice.actions;
 export default appSlice.reducer;

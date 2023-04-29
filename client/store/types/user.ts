@@ -25,3 +25,11 @@ export interface LoginUserDto {
   email: string;
   password: string;
 }
+
+export interface changeFollowDto {
+  myId: string;
+  friendId: string;
+}
+export interface SuccesFetch {
+  data: User;
+}
