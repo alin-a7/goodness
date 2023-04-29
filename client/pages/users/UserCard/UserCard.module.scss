@@ -23,9 +23,6 @@
 
 .button {
   width: 45%;
-  &:hover {
-    border: 1px solid rgb(23, 14, 36);
-  }
 
   &:disabled {
     border: 1px solid rgb(23, 14, 36);

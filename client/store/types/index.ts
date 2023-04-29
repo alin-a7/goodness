@@ -4,7 +4,7 @@ export interface User {
   email: string;
   password: string;
   friends: string[];
-  deedList: string[];
+  deedList: Deed[];
   rate: number;
 }
 
@@ -30,6 +30,29 @@ export interface changeFollowDto {
   myId: string;
   friendId: string;
 }
-export interface SuccesFetch {
+export interface SuccessFetch {
   data: User;
+}
+
+export interface Deed {
+  _id: string;
+  authorId: string[];
+  text: string;
+  isDone: boolean;
+  comments: string[];
+}
+
+export interface CreateDeedDto {
+  authorId: string;
+  text: string;
+}
+
+export interface UpdateDeedDto {
+  isDone: boolean;
+  text: string;
+  deedId: string;
+}
+export interface RatingDto {
+  id: string;
+  increase: boolean;
 }

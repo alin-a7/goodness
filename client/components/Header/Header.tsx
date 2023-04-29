@@ -2,10 +2,20 @@ import { FC } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { NAVIGATION_MENU } from "./constants";
 import { useAppSelector } from "@/store/hooks";
 
 import styles from "./Header.module.scss";
+
+const NAVIGATION_MENU = [
+  {
+    href: "/",
+    label: "My profile",
+  },
+  {
+    href: "/users",
+    label: "All users",
+  },
+];
 
 const Header: FC = () => {
   const { currentUser } = useAppSelector((store) => store.app);

@@ -6,8 +6,12 @@ import {
   RegistrationFormState,
   UpdateUserDto,
   User,
+  CreateDeedDto,
+  Deed,
+  UpdateDeedDto,
   changeFollowDto,
-} from "../types/user";
+  RatingDto,
+} from "../types";
 
 export const userApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -18,22 +22,24 @@ export const userApi = createApi({
       return action.payload[reducerPath];
     }
   },
-  tagTypes: ["User"],
+  tagTypes: ["AllUsers", "CurrentUser"],
   endpoints: (builder) => ({
     getAllUser: builder.query<User[], void>({
       query: () => `/user`,
-      providesTags: (result) => ["User"],
+      providesTags: (result) => ["AllUsers"],
     }),
     getUser: builder.query<User, string>({
       query: (id) => `/user/${id}`,
+      providesTags: (result) => ["CurrentUser"],
     }),
+
     createUser: builder.mutation<User, RegistrationFormState>({
       query: (user) => ({
         url: `/auth/registration`,
         method: "POST",
         body: user,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["AllUsers"],
     }),
     loginUser: builder.mutation<User, LoginUserDto>({
       query: (user) => ({
@@ -41,7 +47,7 @@ export const userApi = createApi({
         method: "POST",
         body: user,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["AllUsers"],
     }),
     changeFollow: builder.mutation<User, changeFollowDto>({
       query: (body) => ({
@@ -49,7 +55,7 @@ export const userApi = createApi({
         method: "POST",
         body: body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["AllUsers"],
     }),
     updateUser: builder.mutation<UpdateUserDto, User>({
       query: (user) => ({
@@ -57,14 +63,45 @@ export const userApi = createApi({
         method: "PATCH",
         body: user,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["AllUsers"],
     }),
     deleteUser: builder.mutation<{ id: string }, { id: string }>({
       query: (id) => ({
         url: `/user/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["AllUsers"],
+    }),
+    createTodo: builder.mutation<Deed, CreateDeedDto>({
+      query: (todo) => ({
+        url: `/deed`,
+        method: "POST",
+        body: todo,
+      }),
+      invalidatesTags: ["CurrentUser"],
+    }),
+    updateTodo: builder.mutation<Deed, UpdateDeedDto>({
+      query: (todo) => ({
+        url: `/deed`,
+        method: "PATCH",
+        body: todo,
+      }),
+      invalidatesTags: ["CurrentUser"],
+    }),
+    upgradeRating: builder.mutation<User, RatingDto>({
+        query: (dto) => ({
+          url: `/user/rating`,
+          method: "PATCH",
+          body: dto,
+        }),
+        invalidatesTags: ["CurrentUser"],
+      }),  
+    deleteTodo: builder.mutation<{ id: string }, string>({
+      query: (id) => ({
+        url: `/deed/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["CurrentUser"],
     }),
   }),
 });
@@ -72,6 +109,10 @@ export const userApi = createApi({
 export const {
   useGetUserQuery,
   useGetAllUserQuery,
+  useUpgradeRatingMutation,
+  useCreateTodoMutation,
+  useUpdateTodoMutation,
+  useDeleteTodoMutation,
   useChangeFollowMutation,
   useCreateUserMutation,
   useDeleteUserMutation,

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
-import { RegistrationFormState } from "@/store/types/user";
+import { RegistrationFormState } from "@/store/types";
 
 import styles from "./FormInput.module.scss";
 

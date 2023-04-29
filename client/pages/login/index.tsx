@@ -6,7 +6,7 @@ import Link from "next/link";
 import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
 
-import { LoginFormState } from "@/store/types/user";
+import { LoginFormState } from "@/store/types";
 import { useLoginUserMutation } from "@/store/api/userApi";
 import { useActions } from "@/store/hooks";
 

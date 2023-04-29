@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
-import { RegistrationFormState, User } from "@/store/types/user";
+import { RegistrationFormState, User } from "@/store/types";
 import { useCreateUserMutation } from "@/store/api/userApi";
 import { useActions } from "@/store/hooks";
 

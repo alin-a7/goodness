@@ -8,7 +8,7 @@ import {
 } from "@/store/api/userApi";
 import { wrapper } from "@/store/store";
 
-import UserCard from "./components/UserCard";
+import UserCard from "./UserCard";
 
 import styles from "./UsersPage.module.scss";
 

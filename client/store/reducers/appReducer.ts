@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { User } from "../types/user";
+import { User } from "../types";
 
 const initialSatate: { currentUser: User } = {
   currentUser: {} as User,

@@ -4,3 +4,15 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.userWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userName {
+  color: #f0e14a;
+  padding-bottom: 50px;
+}

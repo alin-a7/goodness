@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
+
 import { useActions, useAppSelector } from "@/store/hooks";
 import { useChangeFollowMutation } from "@/store/api/userApi";
-import { SuccesFetch, changeFollowDto } from "@/store/types/user";
+import { SuccessFetch, changeFollowDto } from "@/store/types";
+import { Deed } from "@/store/types";
 
 import styles from "./UserCard.module.scss";
 
@@ -8,11 +11,12 @@ interface UserCardProps {
   _id: string;
   name: string;
   friends: string[];
-  deedList: string[];
+  deedList: Deed[];
   rate: number;
 }
 
 const UserCard = ({ name, friends, deedList, rate, _id }: UserCardProps) => {
+  const { push } = useRouter();
   const [changeFollow] = useChangeFollowMutation();
 
   const { currentUser } = useAppSelector((store) => store.app);
@@ -28,7 +32,7 @@ const UserCard = ({ name, friends, deedList, rate, _id }: UserCardProps) => {
       friendId: _id,
     };
 
-    const result = (await changeFollow(changeFollowDto)) as SuccesFetch;
+    const result = (await changeFollow(changeFollowDto)) as SuccessFetch;
     setCurrentUser(result.data);
   };
 
@@ -39,7 +43,11 @@ const UserCard = ({ name, friends, deedList, rate, _id }: UserCardProps) => {
       <div className={styles.cardItem}>Number of todos: {deedList?.length}</div>
       <div className={styles.cardItem}>Rate: {rate}</div>
       <div className={styles.btnWrapper}>
-        <button className={styles.button} disabled={isFollowButton && !isFriend}>
+        <button
+          className={styles.button}
+          onClick={() => push(`/users/${_id}`)}
+          disabled={isFollowButton && !isFriend}
+        >
           Details
         </button>
         {isFollowButton && (

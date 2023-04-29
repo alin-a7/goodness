@@ -1,18 +1,16 @@
-import Layout from '@/components/Layout';
-
-import { useAppSelector } from '@/store/hooks';
-import { useGetUserQuery } from '@/store/api/userApi';
+import Layout from "@/components/Layout";
+import { useAppSelector } from "@/store/hooks";
 
 import styles from "../styles/HomePage.module.scss";
 
-const HomePage = () => {
+const Profile = () => {
   const { currentUser } = useAppSelector((store) => store.app);
 
   return (
     <Layout>
       {currentUser._id ? (
         <>
-          <div>Good Deeds</div>
+          <div>Profile</div>
           <h1>{currentUser?.name}</h1>
         </>
       ) : (
@@ -20,6 +18,6 @@ const HomePage = () => {
       )}
     </Layout>
   );
-}
+};
 
-export default HomePage
+export default Profile;
