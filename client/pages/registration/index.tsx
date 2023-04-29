@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
@@ -13,7 +13,11 @@ import styles from "./Registration.module.scss";
 
 const Registration = () => {
   const { setCurrentUser } = useActions();
-  setCurrentUser({} as User);
+
+  useEffect(() => {
+    setCurrentUser({} as User);
+  }, []);
+
   const [registrationError, setRegistrationError] = useState("");
   const {
     register,

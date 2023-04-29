@@ -33,7 +33,7 @@ const Todo = ({ index, text, isDone, comments, authorId, _id }: TodoProps) => {
     const updateDeedDto: UpdateDeedDto = {
       isDone: !isDone,
       text: text,
-      deedId: _id,
+      id: _id,
     };
     const ratingDto: RatingDto = {
       id: currentUser._id,

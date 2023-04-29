@@ -18,7 +18,7 @@ export interface LoginFormState {
 
 export interface UpdateUserDto {
   name: string;
-  userId: string;
+  id: string;
 }
 
 export interface LoginUserDto {
@@ -43,14 +43,14 @@ export interface Deed {
 }
 
 export interface CreateDeedDto {
-  authorId: string;
+  id: string;
   text: string;
 }
 
 export interface UpdateDeedDto {
   isDone: boolean;
   text: string;
-  deedId: string;
+  id: string;
 }
 export interface RatingDto {
   id: string;

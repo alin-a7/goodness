@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-around;
+  width: 45%;
+  padding-bottom: 40px;
+  border-bottom: 3px solid #f0e14a;
+}
+
+.title {
+  color: #f0e14a;
+}
+
+.cardItem {
+  font-weight: 700;
+}
+
+.info,
+.btnWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button {
+  width: 45%;
+}

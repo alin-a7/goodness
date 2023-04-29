@@ -11,7 +11,6 @@ import {
 import { wrapper } from "@/store/store";
 import { Deed } from "@/store/types";
 
-
 import styles from "./UsersPage.module.scss";
 
 const UserDetails = () => {
@@ -23,7 +22,7 @@ const UserDetails = () => {
     <Layout>
       <div className={styles.userWrapper}>
         <h1 className={styles.userName}>{user?.name}</h1>
-        <TodoList todoList={user?.deedList as Deed[]}/>
+        <TodoList todoList={user?.deedList as Deed[]} />
       </div>
     </Layout>
   );

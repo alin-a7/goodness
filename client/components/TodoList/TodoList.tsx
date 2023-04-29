@@ -10,9 +10,13 @@ interface TodoListProps {
 const TodoList = ({ todoList }: TodoListProps) => {
   return (
     <div className={styles.todoList}>
-      {todoList.map((todo, index) => (
-        <Todo key={index} index={index} {...todo} />
-      ))}
+      {todoList?.length ? (
+        todoList.map((todo, index) => (
+          <Todo key={index} index={index} {...todo} />
+        ))
+      ) : (
+        <h2 className={styles.notFound}>Todo not found</h2>
+      )}
     </div>
   );
 };
