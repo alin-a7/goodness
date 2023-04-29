@@ -1,14 +1,23 @@
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import Link from "next/link";
 
 import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
-import { Error, LoginFormState, User, loginUser } from "@/api";
+
+import { LoginFormState } from "@/store/types/user";
+import { useLoginUserMutation } from "@/store/api/userApi";
+import { useActions } from "@/store/hooks";
 
 import styles from "./Login.module.scss";
 
 const Login = () => {
   const { push } = useRouter();
+  const { setCurrentUserId } = useActions();
+  const [loginError, setLoginError] = useState("");
+
+  const [loginUser] = useLoginUserMutation();
 
   const {
     register,
@@ -19,12 +28,12 @@ const Login = () => {
   });
 
   const formSubmit = async (data: LoginFormState) => {
-    const { status, result } = await loginUser(data);
-    if (status === 201) {
-      console.log((result as User)._id);
-      push("/");
+    const result = await loginUser(data);
+    if ("error" in result) {
+      setLoginError("Incorrect email or password");
     } else {
-      console.log((result as Error).message);
+      setCurrentUserId(result.data._id)
+      push("/");
     }
   };
 
@@ -49,6 +58,11 @@ const Login = () => {
             Submit!
           </button>
         </form>
+        {loginError && <div>{loginError}</div>}
+
+        <h2>
+          or <Link href="/registration">Sing Up</Link>
+        </h2>
       </div>
     </Layout>
   );

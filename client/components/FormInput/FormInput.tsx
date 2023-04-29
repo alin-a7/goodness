@@ -1,8 +1,17 @@
 import { FC } from "react";
+import { FieldError, UseFormRegister } from "react-hook-form";
 
-import { InputsProps } from "@/api";
+import { RegistrationFormState } from "@/store/types/user";
 
 import styles from "./FormInput.module.scss";
+
+export interface InputsProps {
+  error?: FieldError | undefined;
+  type: "name" | "email" | "password";
+  placeholder: string;
+  register: UseFormRegister<RegistrationFormState>;
+}
+
 
 const FormInput: FC<InputsProps> = ({ error, register, type, placeholder }) => {
   return (

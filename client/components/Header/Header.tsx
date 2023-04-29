@@ -2,11 +2,14 @@ import { FC } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import { useAppSelector } from "@/hooks/redux";
 import { NAVIGATION_MENU } from "./constants";
 
 import styles from "./Header.module.scss";
 
 const Header: FC = () => {
+  const { currentUserId } = useAppSelector((store) => store.app);
+
   const { pathname } = useRouter();
 
   return (
@@ -26,7 +29,7 @@ const Header: FC = () => {
           ))}
         </div>
         <Link href="/registration" className={styles.singUp}>
-          Sing Up
+          {!currentUserId ? "Sing Up" : "Log out"}
         </Link>
       </nav>
     </header>

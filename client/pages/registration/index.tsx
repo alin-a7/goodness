@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
-import { RegistrationFormState, createUser } from "@/api";
+import { RegistrationFormState } from "@/store/types/user";
+import { useCreateUserMutation } from "@/store/api/userApi";
+import { useActions } from "@/store/hooks";
 
 import styles from "./Registration.module.scss";
 
 const Registration = () => {
-  const { push } = useRouter();
+  const { setCurrentUserId } = useActions();
+  setCurrentUserId('')
+  const [registrationError, setRegistrationError] = useState("");
   const {
     register,
     handleSubmit,
@@ -18,10 +23,17 @@ const Registration = () => {
     mode: "onBlur",
   });
 
+  const [createUser] = useCreateUserMutation();
+  const { push } = useRouter();
+
   const formSubmit = async (data: RegistrationFormState) => {
-    const user = await createUser(data)
-    console.log(user._id);
-    push("/");
+    const result = await createUser(data);
+    if ("error" in result) {
+      setRegistrationError("A user with this email exists");
+    } else {
+      setCurrentUserId(result.data._id)
+      push("/");
+    }
   };
 
   return (
@@ -51,6 +63,7 @@ const Registration = () => {
             Submit!
           </button>
         </form>
+        {registrationError && <div>{registrationError}</div>}
 
         <h2>
           or <Link href="/login"> Log in</Link>

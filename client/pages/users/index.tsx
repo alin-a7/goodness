@@ -15,7 +15,7 @@ const UsersPage = () => {
       {router.isFallback ? (
         <div>Loading...</div>
       ) : (
-        users?.map((user, index) => <div key={user.email}>{user.name}</div>)
+        users?.map((user) => <div key={user.email}>{user.name}</div>)
       )}
     </Layout>
   );
