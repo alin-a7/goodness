@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
+import { SuccessFetch } from "@/store/types";
+import { useActions } from "@/store/hooks";
 import { useUpdateUserMutation } from "@/store/api/appApi";
 
 import styles from "./UpdateForm.module.scss";
@@ -25,6 +27,8 @@ export const UpdateUserForm = ({ dto, closeModal }: UpdateUserFormProps) => {
     mode: "onSubmit",
   });
 
+  const { setCurrentUser } = useActions();
+
   useEffect(() => {
     setValue("name", dto.name);
   }, [dto.name, setValue]);
@@ -33,8 +37,11 @@ export const UpdateUserForm = ({ dto, closeModal }: UpdateUserFormProps) => {
 
   const formSubmit = async (data: { name: string }) => {
     const newDto = { ...dto, name: data.name };
-    await updateUser(newDto);
-    closeModal()
+    const result = await updateUser(newDto);
+    if ("data" in result) {
+      setCurrentUser(result.data);
+    }
+    closeModal();
   };
 
   return (

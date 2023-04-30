@@ -14,7 +14,9 @@ import styles from "./UsersPage.module.scss";
 
 const UsersPage = () => {
   const router = useRouter();
-  const { data: users } = useGetAllUserQuery();
+  const { data: users } = useGetAllUserQuery(undefined, {
+    pollingInterval: 50000,
+  });
   return (
     <Layout>
       {router.isFallback ? (

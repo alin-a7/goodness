@@ -16,7 +16,7 @@ const Registration = () => {
 
   useEffect(() => {
     setCurrentUser({} as User);
-  }, [setCurrentUser]);
+  }, []); // eslint-disable-line
 
   const [registrationError, setRegistrationError] = useState("");
   const {

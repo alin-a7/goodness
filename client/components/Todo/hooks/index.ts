@@ -4,13 +4,18 @@ import {
   useUpgradeRatingMutation,
 } from "@/store/api/appApi";
 import { useAppSelector } from "@/store/hooks";
-import { RatingDto, UpdateDeedDto } from "@/store/types";
+import { CreateCommentDto, RatingDto, UpdateDeedDto } from "@/store/types";
 import { TodoProps } from "../Todo";
+import { useState } from "react";
 
 export const useTodo = ({ text, isDone, authorId, _id }: TodoProps) => {
+  const [showComments, setShowComments] = useState(false);
   const { currentUser } = useAppSelector((store) => store.app);
   const isAuthor = currentUser._id === authorId[0];
 
+  const changeShow = () => {
+    setShowComments((prev) => !prev);
+  };
   const [deleteTodo] = useDeleteTodoMutation();
   const handleDelete = async () => {
     await deleteTodo(_id);
@@ -32,5 +37,19 @@ export const useTodo = ({ text, isDone, authorId, _id }: TodoProps) => {
     await ratingUpgrade(ratingDto);
     await updateTodo(updateDeedDto);
   };
-  return { isAuthor, handleDone, handleDelete };
+
+  const createCommentDto: CreateCommentDto = {
+    deedId: _id,
+    text: "",
+    author: currentUser.name,
+  };
+
+  return {
+    isAuthor,
+    handleDone,
+    handleDelete,
+    showComments,
+    changeShow,
+    createCommentDto,
+  };
 };

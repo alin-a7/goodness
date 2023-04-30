@@ -1,0 +1,35 @@
+.commentList {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: flex-end;
+}
+
+.comment {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+
+  border: 2px solid #1e1c33;
+  border-radius: 10px;
+  background: white;
+  padding: 10px;
+  color: #1e1c33;
+}
+
+.name {
+  font-weight: 700;
+  width: 20%;
+}
+
+.text {
+  width: 70%;
+}
+
+.noComments {
+  padding-top: 10px;
+  color: #f0e14a;
+  font-size: 20px;
+  text-align: center;
+}

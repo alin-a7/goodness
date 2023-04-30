@@ -56,3 +56,17 @@ export interface RatingDto {
   id: string;
   increase: boolean;
 }
+
+export interface CreateCommentDto {
+  author: string;
+  deedId: string;
+  text: string;
+}
+
+export interface Comment {
+  text: string,
+  author: string,
+  deedId: string[],
+  _id: string,
+
+}
