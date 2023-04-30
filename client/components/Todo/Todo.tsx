@@ -39,8 +39,8 @@ const Todo = ({ index, text, isDone, comments, authorId, _id }: TodoProps) => {
       id: currentUser._id,
       increase: !isDone,
     };
-    await updateTodo(updateDeedDto);
     await ratingUpgrade(ratingDto);
+    await updateTodo(updateDeedDto);
   };
 
   return (

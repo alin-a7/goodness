@@ -55,7 +55,7 @@ export const userApi = createApi({
         method: "POST",
         body: body,
       }),
-      invalidatesTags: ["AllUsers"],
+      invalidatesTags: ["AllUsers", "CurrentUser"],
     }),
     updateUser: builder.mutation<UpdateUserDto, User>({
       query: (user) => ({
@@ -65,7 +65,7 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["AllUsers"],
     }),
-    deleteUser: builder.mutation<{ id: string }, { id: string }>({
+    deleteUser: builder.mutation<{ id: string }, string>({
       query: (id) => ({
         url: `/user/${id}`,
         method: "DELETE",
@@ -89,13 +89,13 @@ export const userApi = createApi({
       invalidatesTags: ["CurrentUser"],
     }),
     upgradeRating: builder.mutation<User, RatingDto>({
-        query: (dto) => ({
-          url: `/user/rating`,
-          method: "PATCH",
-          body: dto,
-        }),
-        invalidatesTags: ["CurrentUser"],
-      }),  
+      query: (dto) => ({
+        url: `/user/rating`,
+        method: "PATCH",
+        body: dto,
+      }),
+      invalidatesTags: ["CurrentUser"],
+    }),
     deleteTodo: builder.mutation<{ id: string }, string>({
       query: (id) => ({
         url: `/deed/${id}`,

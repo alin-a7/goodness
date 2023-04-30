@@ -5,10 +5,13 @@ import styles from "./TodoList.module.scss";
 
 interface TodoListProps {
   todoList: Deed[];
+  isLoading?: boolean;
 }
 
-const TodoList = ({ todoList }: TodoListProps) => {
-  return (
+const TodoList = ({ todoList, isLoading }: TodoListProps) => {
+  return isLoading ? (
+    <div className={styles.loading}>Loading...</div>
+  ) : (
     <div className={styles.todoList}>
       {todoList?.length ? (
         todoList.map((todo, index) => (

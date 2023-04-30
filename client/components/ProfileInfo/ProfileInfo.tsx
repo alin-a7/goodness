@@ -1,8 +1,18 @@
 import { User } from "@/store/types";
+import { useDeleteUserMutation } from "@/store/api/userApi";
 
 import styles from "./ProfileInfo.module.scss";
+import { useRouter } from "next/router";
 
-const ProfileInfo = ({ name, friends, deedList, rate }: User) => {
+const ProfileInfo = ({ name, friends, deedList, rate, _id }: User) => {
+  const [deleteUser] = useDeleteUserMutation();
+
+  const { push } = useRouter();
+
+  const handleDelete = async () => {
+    await deleteUser(_id);
+    push("/registration");
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -16,7 +26,7 @@ const ProfileInfo = ({ name, friends, deedList, rate }: User) => {
       </div>
       <div className={styles.btnWrapper}>
         <button className={styles.button}>Update</button>
-        <button className={styles.button}>Delete</button>
+        <button className={styles.button} onClick={handleDelete}>Delete</button>
       </div>
     </div>
   );
