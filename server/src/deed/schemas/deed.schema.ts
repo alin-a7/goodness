@@ -19,7 +19,7 @@ export class Deed {
   @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'User' }] })
   authorId: User;
 
-  @Prop({ type: [{ type: mongosse.Schema.Types.ObjectId, ref: 'Comment' }] })
+  @Prop()
   comments: Comment[];
 }
 

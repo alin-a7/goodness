@@ -53,11 +53,11 @@ export class DeedService {
     return deeds;
   }
 
-  async addComment(dto: CreateCommentDto): Promise<Comment> {
+  async addComment(dto: CreateCommentDto): Promise<Deed> {
     const deed = await this.deedModel.findById(dto.deedId);
     const comment = await this.commentModel.create({ ...dto });
-    deed.comments.push(comment._id);
+    deed.comments.push(comment);
     await deed.save();
-    return comment;
+    return deed;
   }
 }
