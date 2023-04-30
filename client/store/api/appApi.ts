@@ -13,7 +13,7 @@ import {
   RatingDto,
 } from "../types";
 
-export const userApi = createApi({
+export const appApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
   }),
@@ -63,7 +63,7 @@ export const userApi = createApi({
         method: "PATCH",
         body: user,
       }),
-      invalidatesTags: ["AllUsers"],
+      invalidatesTags: ["AllUsers", "CurrentUser"],
     }),
     deleteUser: builder.mutation<{ id: string }, string>({
       query: (id) => ({
@@ -119,6 +119,6 @@ export const {
   useLoginUserMutation,
   useUpdateUserMutation,
   util: { getRunningQueriesThunk },
-} = userApi;
+} = appApi;
 
-export const { getAllUser, getUser } = userApi.endpoints;
+export const { getAllUser, getUser } = appApi.endpoints;

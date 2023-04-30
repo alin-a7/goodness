@@ -7,7 +7,7 @@ import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
 
 import { LoginFormState } from "@/store/types";
-import { useLoginUserMutation } from "@/store/api/userApi";
+import { useLoginUserMutation } from "@/store/api/appApi";
 import { useActions } from "@/store/hooks";
 
 import styles from "./Login.module.scss";

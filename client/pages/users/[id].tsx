@@ -7,7 +7,7 @@ import {
   getRunningQueriesThunk,
   getUser,
   useGetUserQuery,
-} from "@/store/api/userApi";
+} from "@/store/api/appApi";
 import { wrapper } from "@/store/store";
 import { Deed } from "@/store/types";
 

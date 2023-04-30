@@ -4,7 +4,7 @@ import TodoList from "@/components/TodoList";
 
 import { useAppSelector } from "@/store/hooks";
 import { Deed, User } from "@/store/types";
-import { useGetUserQuery } from "@/store/api/userApi";
+import { useGetUserQuery } from "@/store/api/appApi";
 import CreateTodoForm, { Dto } from "@/components/CreateTodoForm";
 
 import styles from "../styles/HomePage.module.scss";

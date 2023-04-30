@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import FormInput from "@/components/FormInput";
 import Layout from "@/components/Layout";
 import { RegistrationFormState, User } from "@/store/types";
-import { useCreateUserMutation } from "@/store/api/userApi";
+import { useCreateUserMutation } from "@/store/api/appApi";
 import { useActions } from "@/store/hooks";
 
 import styles from "./Registration.module.scss";
@@ -16,7 +16,7 @@ const Registration = () => {
 
   useEffect(() => {
     setCurrentUser({} as User);
-  }, []);
+  }, [setCurrentUser]);
 
   const [registrationError, setRegistrationError] = useState("");
   const {

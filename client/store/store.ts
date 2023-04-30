@@ -1,17 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import { userApi } from "./api/userApi";
+import { appApi } from "./api/appApi";
 import appSlice from "./reducers/appReducer";
 
 export const rootReducer = combineReducers({
   app: appSlice,
-  [userApi.reducerPath]: userApi.reducer,
+  [appApi.reducerPath]: appApi.reducer,
 });
 
 export const makeStore = () =>
   configureStore({
     reducer: rootReducer,
-    middleware: (gDM) => gDM().concat(userApi.middleware),
+    middleware: (gDM) => gDM().concat(appApi.middleware),
   });
 
 export type AppStore = ReturnType<typeof makeStore>;

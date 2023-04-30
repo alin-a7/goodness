@@ -1,9 +1,5 @@
-import { useRouter } from "next/router";
-
-import { useActions, useAppSelector } from "@/store/hooks";
-import { useChangeFollowMutation } from "@/store/api/userApi";
-import { SuccessFetch, changeFollowDto } from "@/store/types";
 import { Deed } from "@/store/types";
+import { useUserCard } from "./hooks";
 
 import styles from "./UserCard.module.scss";
 
@@ -16,25 +12,8 @@ interface UserCardProps {
 }
 
 const UserCard = ({ name, friends, deedList, rate, _id }: UserCardProps) => {
-  const { push } = useRouter();
-  const [changeFollow] = useChangeFollowMutation();
-
-  const { currentUser } = useAppSelector((store) => store.app);
-  const { setCurrentUser } = useActions();
-
-  const isFriend = currentUser.friends?.includes(_id);
-  const isDisabled = !!currentUser._id;
-  const isFollowButton = currentUser._id !== _id;
-
-  const handleChangeFollow = async () => {
-    const changeFollowDto: changeFollowDto = {
-      myId: currentUser._id,
-      friendId: _id,
-    };
-
-    const result = (await changeFollow(changeFollowDto)) as SuccessFetch;
-    setCurrentUser(result.data);
-  };
+  const { isDisabled, isFollowButton, isFriend, handleChangeFollow, push } =
+    useUserCard(_id);
 
   return (
     <div className={styles.card}>

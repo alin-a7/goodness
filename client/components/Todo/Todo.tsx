@@ -1,17 +1,12 @@
-import { useAppSelector } from "@/store/hooks";
-import { RatingDto, UpdateDeedDto } from "@/store/types";
-import {
-  useDeleteTodoMutation,
-  useUpdateTodoMutation,
-  useUpgradeRatingMutation,
-} from "@/store/api/userApi";
-
-import styles from "./Todo.module.scss";
 import { useModal } from "@/hooks/useModal";
+
 import Modal from "../Modal";
 import { UpdateTodoForm } from "../UpdateForm";
+import { useTodo } from "./hooks";
 
-interface TodoProps {
+import styles from "./Todo.module.scss";
+
+export interface TodoProps {
   _id: string;
   authorId: string[];
   index: number;
@@ -20,32 +15,10 @@ interface TodoProps {
   comments: string[];
 }
 
-const Todo = ({ index, text, isDone, comments, authorId, _id }: TodoProps) => {
-  const { currentUser } = useAppSelector((store) => store.app);
-  const isAuthor = currentUser._id === authorId[0];
+const Todo = (props: TodoProps) => {
+  const { index, text, isDone, comments, _id } = props;
 
-  const [deleteTodo] = useDeleteTodoMutation();
-  const handleDelete = async () => {
-    await deleteTodo(_id);
-  };
-
-  const [updateTodo] = useUpdateTodoMutation();
-  const [ratingUpgrade] = useUpgradeRatingMutation();
-
-  const handleDone = async () => {
-    const updateDeedDto: UpdateDeedDto = {
-      isDone: !isDone,
-      text: text,
-      id: _id,
-    };
-    const ratingDto: RatingDto = {
-      id: currentUser._id,
-      increase: !isDone,
-    };
-    await ratingUpgrade(ratingDto);
-    await updateTodo(updateDeedDto);
-  };
-
+  const { isAuthor, handleDone, handleDelete } = useTodo(props);
   const { isVisible, open: openModal, close: closeModal } = useModal();
 
   return (

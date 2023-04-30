@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { useUpdateUserMutation } from "@/store/api/userApi";
+import { useUpdateUserMutation } from "@/store/api/appApi";
 
 import styles from "./UpdateForm.module.scss";
 
@@ -10,12 +10,12 @@ export interface UserDto {
   name: string;
 }
 
-interface CreateFormProps {
+interface UpdateUserFormProps {
   dto: UserDto;
   closeModal: () => void;
 }
 
-export const UpdateUserForm = ({ dto, closeModal }: CreateFormProps) => {
+export const UpdateUserForm = ({ dto, closeModal }: UpdateUserFormProps) => {
   const {
     register,
     setValue,
@@ -27,7 +27,7 @@ export const UpdateUserForm = ({ dto, closeModal }: CreateFormProps) => {
 
   useEffect(() => {
     setValue("name", dto.name);
-  }, []);
+  }, [dto.name, setValue]);
 
   const [updateUser] = useUpdateUserMutation();
 

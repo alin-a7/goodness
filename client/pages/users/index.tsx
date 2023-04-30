@@ -5,7 +5,7 @@ import {
   getAllUser,
   getRunningQueriesThunk,
   useGetAllUserQuery,
-} from "@/store/api/userApi";
+} from "@/store/api/appApi";
 import { wrapper } from "@/store/store";
 
 import UserCard from "../../components/UserCard";

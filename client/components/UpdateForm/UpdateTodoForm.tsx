@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import {
-  useUpdateTodoMutation,
-} from "@/store/api/userApi";
+import { useUpdateTodoMutation } from "@/store/api/appApi";
 
 import styles from "./UpdateForm.module.scss";
 
@@ -13,12 +11,12 @@ export interface TodoDto {
   isDone: boolean;
 }
 
-interface CreateFormProps {
+interface UpdateTodoFormProps {
   dto: TodoDto;
   closeModal: () => void;
 }
 
-export const UpdateTodoForm = ({ dto, closeModal }: CreateFormProps) => {
+export const UpdateTodoForm = ({ dto, closeModal }: UpdateTodoFormProps) => {
   const {
     register,
     setValue,
@@ -30,7 +28,7 @@ export const UpdateTodoForm = ({ dto, closeModal }: CreateFormProps) => {
 
   useEffect(() => {
     setValue("text", dto.text);
-  }, []);
+  }, [dto.text, setValue]);
 
   const [updateTodo] = useUpdateTodoMutation();
 
@@ -55,4 +53,3 @@ export const UpdateTodoForm = ({ dto, closeModal }: CreateFormProps) => {
     </form>
   );
 };
-

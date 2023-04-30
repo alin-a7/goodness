@@ -1,5 +1,5 @@
 import { User } from "@/store/types";
-import { useDeleteUserMutation } from "@/store/api/userApi";
+import { useDeleteUserMutation } from "@/store/api/appApi";
 import { useRouter } from "next/router";
 import { useModal } from "@/hooks/useModal";
 

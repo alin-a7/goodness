@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import { useCreateTodoMutation } from "@/store/api/userApi";
+import { useCreateTodoMutation } from "@/store/api/appApi";
 
 import styles from "./CreateTodoForm.module.scss";
 
@@ -16,6 +16,7 @@ interface CreateFormProps {
 const CreateTodoForm = ({ dto }: CreateFormProps) => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm<{ text: string }>({
@@ -26,6 +27,7 @@ const CreateTodoForm = ({ dto }: CreateFormProps) => {
   const formSubmit = async (data: { text: string }) => {
     const newDto = {...dto, text: data.text}
     await createTodo(newDto)
+    reset()
   };
 
   return (
