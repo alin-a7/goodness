@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { useCreateTodoMutation } from "@/store/api/userApi";
 
-import styles from "./CreateForm.module.scss";
+import styles from "./CreateTodoForm.module.scss";
 
 export interface Dto {
   id: string;
@@ -14,7 +13,7 @@ interface CreateFormProps {
   dto: Dto;
 }
 
-const CreateForm = ({ dto }: CreateFormProps) => {
+const CreateTodoForm = ({ dto }: CreateFormProps) => {
   const {
     register,
     handleSubmit,
@@ -45,4 +44,4 @@ const CreateForm = ({ dto }: CreateFormProps) => {
   );
 };
 
-export default CreateForm;
+export default CreateTodoForm;

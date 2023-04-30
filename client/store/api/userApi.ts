@@ -57,7 +57,7 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["AllUsers", "CurrentUser"],
     }),
-    updateUser: builder.mutation<UpdateUserDto, User>({
+    updateUser: builder.mutation<User, UpdateUserDto>({
       query: (user) => ({
         url: `/user`,
         method: "PATCH",

@@ -5,9 +5,9 @@ import TodoList from "@/components/TodoList";
 import { useAppSelector } from "@/store/hooks";
 import { Deed, User } from "@/store/types";
 import { useGetUserQuery } from "@/store/api/userApi";
+import CreateTodoForm, { Dto } from "@/components/CreateTodoForm";
 
 import styles from "../styles/HomePage.module.scss";
-import CreateForm, { Dto } from "@/components/CreateTodoForm";
 
 const Profile = () => {
   const { currentUser } = useAppSelector((store) => store.app);
@@ -24,7 +24,7 @@ const Profile = () => {
         <div className={styles.wrapper}>
           <div className={styles.profileHeader}>
             <ProfileInfo {...(me as User)} />
-            <CreateForm dto={dto} />
+            <CreateTodoForm dto={dto} />
           </div>
           <TodoList todoList={me?.deedList as Deed[]} isLoading={isLoading}/>
         </div>

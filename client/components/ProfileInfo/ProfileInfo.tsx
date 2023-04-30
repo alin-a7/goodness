@@ -1,13 +1,19 @@
 import { User } from "@/store/types";
 import { useDeleteUserMutation } from "@/store/api/userApi";
+import { useRouter } from "next/router";
+import { useModal } from "@/hooks/useModal";
+
+import Modal from "../Modal";
+import { UpdateUserForm } from "../UpdateForm";
 
 import styles from "./ProfileInfo.module.scss";
-import { useRouter } from "next/router";
 
 const ProfileInfo = ({ name, friends, deedList, rate, _id }: User) => {
   const [deleteUser] = useDeleteUserMutation();
 
   const { push } = useRouter();
+
+  const { isVisible, open: openModal, close: closeModal } = useModal();
 
   const handleDelete = async () => {
     await deleteUser(_id);
@@ -25,9 +31,24 @@ const ProfileInfo = ({ name, friends, deedList, rate, _id }: User) => {
         <div className={styles.cardItem}>Rate: {rate}</div>
       </div>
       <div className={styles.btnWrapper}>
-        <button className={styles.button}>Update</button>
-        <button className={styles.button} onClick={handleDelete}>Delete</button>
+        <button className={styles.button} onClick={openModal}>
+          Update
+        </button>
+        <button className={styles.button} onClick={handleDelete}>
+          Delete
+        </button>
       </div>
+      {isVisible && (
+        <Modal
+          close={closeModal}
+          content={
+            <UpdateUserForm
+              dto={{ id: _id, name: name }}
+              closeModal={closeModal}
+            />
+          }
+        />
+      )}
     </div>
   );
 };

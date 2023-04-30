@@ -7,6 +7,9 @@ import {
 } from "@/store/api/userApi";
 
 import styles from "./Todo.module.scss";
+import { useModal } from "@/hooks/useModal";
+import Modal from "../Modal";
+import { UpdateTodoForm } from "../UpdateForm";
 
 interface TodoProps {
   _id: string;
@@ -43,6 +46,8 @@ const Todo = ({ index, text, isDone, comments, authorId, _id }: TodoProps) => {
     await updateTodo(updateDeedDto);
   };
 
+  const { isVisible, open: openModal, close: closeModal } = useModal();
+
   return (
     <div className={styles.todo}>
       <div className={styles.content}>
@@ -59,11 +64,24 @@ const Todo = ({ index, text, isDone, comments, authorId, _id }: TodoProps) => {
           <button className={styles.button} onClick={handleDone}>
             Done!
           </button>
-          <button className={styles.button}>Update</button>
+          <button className={styles.button} onClick={openModal}>
+            Update
+          </button>
           <button className={styles.button} onClick={handleDelete}>
             Delete
           </button>
         </div>
+      )}
+      {isVisible && (
+        <Modal
+          close={closeModal}
+          content={
+            <UpdateTodoForm
+              dto={{ id: _id, text: text, isDone: isDone }}
+              closeModal={closeModal}
+            />
+          }
+        />
       )}
     </div>
   );
