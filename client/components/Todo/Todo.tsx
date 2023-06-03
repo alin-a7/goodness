@@ -6,6 +6,10 @@ import { useTodo } from "./hooks";
 import CreateCommentForm from "../CreateCommentForm";
 import CommentList from "../CommentList";
 import { Comment } from "@/store/types";
+import Delete from "@/assets/delete.svg";
+import Update from "@/assets/update.svg";
+import Done from "@/assets/done.svg";
+import NotDone from "@/assets/notDone.svg";
 
 import styles from "./Todo.module.scss";
 
@@ -48,15 +52,14 @@ const Todo = (props: TodoProps) => {
         )}
         {isAuthor && (
           <div className={styles.btnWrapper}>
-            <button className={styles.button} onClick={handleDone}>
-              Done!
-            </button>
-            <button className={styles.button} onClick={openModal}>
-              Update
-            </button>
-            <button className={styles.button} onClick={handleDelete}>
-              Delete
-            </button>
+            {isDone ? (
+              <NotDone onClick={handleDone} />
+            ) : (
+              <Done onClick={handleDone} />
+            )}
+
+            <Update onClick={openModal} />
+            <Delete onClick={handleDelete} />
           </div>
         )}
         {isVisible && (

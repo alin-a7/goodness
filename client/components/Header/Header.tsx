@@ -3,10 +3,15 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import { useAppSelector } from "@/store/hooks";
+import Logo from "@/assets/logo.svg";
 
 import styles from "./Header.module.scss";
 
 const NAVIGATION_MENU = [
+  {
+    href: "/",
+    label: <Logo />,
+  },
   {
     href: "/",
     label: "My profile",

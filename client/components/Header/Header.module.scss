@@ -8,6 +8,7 @@
   z-index: 100;
 
   background-color: rgb(23, 14, 36);
+  box-shadow: 8px 8px 10px rgb(0 0 0);
 }
 
 .navigation {
@@ -19,7 +20,11 @@
 
 .navLink {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  & svg:hover {
+    transition: all 0.5s;
+    scale: 1.1;
+  }
 }
 
 .menuItem {
@@ -29,7 +34,6 @@
   font-size: 25px;
   font-weight: 700;
   gap: 10px;
-  padding: 10px;
   text-transform: capitalize;
 
   &:hover {
