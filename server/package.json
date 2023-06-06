@@ -26,6 +26,7 @@
     "@nestjs/mongoose": "^9.2.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
+    "@vercel/node": "^2.14.5",
     "bcryptjs": "^2.4.3",
     "mongoose": "^7.0.5",
     "reflect-metadata": "^0.1.13",
