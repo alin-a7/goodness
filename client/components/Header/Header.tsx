@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { useAppSelector } from "@/store/hooks";
 import Logo from "@/assets/logo.svg";
+import Avatar from "@/assets/avatar.svg";
 
 import styles from "./Header.module.scss";
 
@@ -43,9 +44,15 @@ const Header: FC = () => {
             </Link>
           ))}
         </div>
-        <Link href="/registration" className={styles.singUp}>
-          {!currentUser._id ? "Sing Up" : "Log out"}
-        </Link>
+        <div className={styles.rightPanel}>
+          <Link href='/' className={styles.user}>
+            <Avatar />
+            <div>{currentUser.name}</div>
+          </Link>
+          <Link href="/registration" className={styles.singUp}>
+            {!currentUser._id ? "Sing Up" : "Log out"}
+          </Link>
+        </div>
       </nav>
     </header>
   );

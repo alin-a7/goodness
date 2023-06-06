@@ -38,17 +38,17 @@
 
   &:hover {
     color: #f0e14a;
-    scale: 1.05;
     cursor: pointer;
   }
 }
 
 .singUp {
   color: white;
+  transition: all 0.5s;
 
   &:hover {
     color: #f0e14a;
-    scale: 1.05;
+    scale: 1.1;
     cursor: pointer;
   }
 }
@@ -56,4 +56,22 @@
 .active {
   color: #f0e14a;
   scale: 1.05;
+}
+
+.rightPanel {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  color: white;
+  gap: 5px;
+
+  &:hover {
+    color: #f0e14a;
+    cursor: pointer;
+  }
 }

@@ -1,13 +1,14 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import Head from "next/head";
 
-import Header from "../Header";
-import Footer from "../Footer";
-
-import styles from "./Layout.module.scss";
 import { useActions, useAppSelector } from "@/store/hooks";
 import { useGetUserQuery } from "@/store/api/appApi";
 import { User } from "@/store/types";
+import Header from "../Header";
+import Footer from "../Footer";
+import Loader from "../Loader";
+
+import styles from "./Layout.module.scss";
 
 type LayotProps = {
   children: ReactNode;
@@ -33,7 +34,7 @@ const Layout: FC<LayotProps> = ({ children }) => {
       <main className={styles.layout}>
         <Header />
         <main className={styles.childrenBlock}>
-          {isLoading ? "Loading" : children}
+          {isLoading ? <Loader/> : children}
         </main>
         <Footer />
       </main>
