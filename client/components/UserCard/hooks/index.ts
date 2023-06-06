@@ -7,16 +7,16 @@ export const useUserCard = (_id: string) => {
   const { push } = useRouter();
   const [changeFollow] = useChangeFollowMutation();
 
-  const { currentUser } = useAppSelector((store) => store.app);
+  const { currentUserId, currentUser } = useAppSelector((store) => store.app);
   const { setCurrentUser } = useActions();
 
   const isFriend = currentUser.friends?.includes(_id);
   const isDisabled = !!currentUser._id;
-  const isFollowButton = currentUser._id !== _id;
+  const isFollowButton = currentUserId !== _id;
 
   const handleChangeFollow = async () => {
     const changeFollowDto: changeFollowDto = {
-      myId: currentUser._id,
+      myId: currentUserId,
       friendId: _id,
     };
 

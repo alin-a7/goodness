@@ -25,14 +25,20 @@
 .btnWrapper {
   display: flex;
   justify-content: space-around;
-  width: 30%;
+  width: 20%;
 }
 
 .button {
   width: 45%;
+  box-shadow: 4px 4px 5px rgb(0 0 0);
+  border: none;
+
+  &:hover {
+    border: none;
+    box-shadow: 2px 2px 2.5px rgb(0 0 0);
+  }
 
   &:disabled {
-    border: 1px solid rgb(23, 14, 36);
     background-color: white;
     color: rgb(23, 14, 36);
     cursor: auto;

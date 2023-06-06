@@ -2,8 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { User } from "../types";
 
-const initialSatate: { currentUser: User } = {
+const ISSERVER = typeof window === "undefined";
+const isUserId = !ISSERVER && !!localStorage.getItem("userId");
+
+interface InitialSatate {
+  currentUser: User;
+  currentUserId: string;
+}
+
+const initialSatate: InitialSatate = {
   currentUser: {} as User,
+  currentUserId: isUserId ? localStorage.getItem("userId") || "" : "",
 };
 
 export const appSlice = createSlice({
@@ -11,10 +20,13 @@ export const appSlice = createSlice({
   initialState: initialSatate,
   reducers: {
     setCurrentUser(state, action: { payload: User }) {
-      state.currentUser = {...action.payload};
+      state.currentUser = { ...action.payload };
+    },
+    setCurrentUserId(state, action: { payload: string }) {
+      state.currentUserId = action.payload;
     },
   },
 });
 
-export const { setCurrentUser } = appSlice.actions;
+export const { setCurrentUser, setCurrentUserId } = appSlice.actions;
 export default appSlice.reducer;

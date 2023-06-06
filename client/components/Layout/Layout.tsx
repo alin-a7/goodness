@@ -1,16 +1,27 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import Head from "next/head";
 
 import Header from "../Header";
 import Footer from "../Footer";
 
 import styles from "./Layout.module.scss";
+import { useActions, useAppSelector } from "@/store/hooks";
+import { useGetUserQuery } from "@/store/api/appApi";
+import { User } from "@/store/types";
 
 type LayotProps = {
   children: ReactNode;
 };
 
 const Layout: FC<LayotProps> = ({ children }) => {
+  const { setCurrentUser } = useActions();
+  const { currentUserId } = useAppSelector((store) => store.app);
+  const { data: me, isLoading } = useGetUserQuery(currentUserId);
+
+  useEffect(() => {
+    setCurrentUser(me as User);
+  }, [me]);
+
   return (
     <>
       <Head>
@@ -21,7 +32,9 @@ const Layout: FC<LayotProps> = ({ children }) => {
       </Head>
       <main className={styles.layout}>
         <Header />
-        <main className={styles.childrenBlock}>{children}</main>
+        <main className={styles.childrenBlock}>
+          {isLoading ? "Loading" : children}
+        </main>
         <Footer />
       </main>
     </>

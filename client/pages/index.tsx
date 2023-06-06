@@ -11,26 +11,32 @@ import styles from "../styles/HomePage.module.scss";
 
 const Profile = () => {
   const { currentUser } = useAppSelector((store) => store.app);
-  const { data: me, isLoading } = useGetUserQuery(currentUser._id);
 
   const dto: Dto = {
     id: currentUser._id,
     text: "",
   };
+  const isClient = typeof window !== "undefined";
+  isClient &&
+    window.addEventListener("beforeunload", () =>
+      localStorage.setItem("userId", currentUser._id)
+    );
 
   return (
     <Layout>
-      {currentUser._id ? (
-        <div className={styles.wrapper}>
-          <div className={styles.profileHeader}>
-            <ProfileInfo {...(me as User)} />
-            <CreateTodoForm dto={dto} />
+      <>
+        {currentUser?._id ? (
+          <div className={styles.wrapper}>
+            <div className={styles.profileHeader}>
+              <ProfileInfo {...(currentUser as User)} />
+              <CreateTodoForm dto={dto} />
+            </div>
+            <TodoList todoList={currentUser?.deedList as Deed[]} />
           </div>
-          <TodoList todoList={me?.deedList as Deed[]} isLoading={isLoading}/>
-        </div>
-      ) : (
-        <h1 className={styles.register}>Register or log in to use the app</h1>
-      )}
+        ) : (
+          <h1 className={styles.register}>Register or log in to use the app</h1>
+        )}
+      </>
     </Layout>
   );
 };

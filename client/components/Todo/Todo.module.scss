@@ -17,13 +17,6 @@
   padding: 10px 20px;
 }
 
-// .todoContent {
-//   width: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-// }
-
 .content {
   width: 50%;
   font-size: 20px;
@@ -37,11 +30,11 @@
 }
 
 .done {
-  color: rgb(12, 79, 12);
+  color: rgb(12, 79, 12) !important;
 }
 
 .notDone {
-  color: rgb(143, 21, 14);
+  color: rgb(143, 21, 14) !important;
 }
 
 .comments {
@@ -49,5 +42,23 @@
   &:hover {
     cursor: pointer;
     scale: 1.05;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    width: 30px;
+    height: 30px;
+    color: #1e1c33;
+    transition: all 0.2s;
+    &:hover {
+      scale: 1.05;
+      cursor: pointer;
+    }
   }
 }
