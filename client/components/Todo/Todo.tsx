@@ -53,9 +53,9 @@ const Todo = (props: TodoProps) => {
         {isAuthor && (
           <div className={styles.btnWrapper}>
             {isDone ? (
-              <NotDone onClick={handleDone} />
+              <NotDone className={styles.notDone} onClick={handleDone} />
             ) : (
-              <Done onClick={handleDone} />
+              <Done className={styles.done} onClick={handleDone} />
             )}
 
             <Update onClick={openModal} />

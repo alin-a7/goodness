@@ -12,11 +12,13 @@ import { useActions } from "@/store/hooks";
 import styles from "./Registration.module.scss";
 
 const Registration = () => {
-  const { setCurrentUser } = useActions();
+  const { setCurrentUser, setCurrentUserId } = useActions();
 
   useEffect(() => {
     setCurrentUser({} as User);
-  }, []); // eslint-disable-line
+    setCurrentUserId('');
+    localStorage.removeItem('userId')
+  }, [setCurrentUser]); 
 
   const [registrationError, setRegistrationError] = useState("");
   const {
@@ -36,6 +38,7 @@ const Registration = () => {
       setRegistrationError("A user with this email exists");
     } else {
       setCurrentUser(result.data);
+      setCurrentUserId(result.data._id);
       push("/");
     }
   };

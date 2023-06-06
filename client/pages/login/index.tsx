@@ -14,7 +14,7 @@ import styles from "./Login.module.scss";
 
 const Login = () => {
   const { push } = useRouter();
-  const { setCurrentUser } = useActions();
+  const { setCurrentUser, setCurrentUserId } = useActions();
   const [loginError, setLoginError] = useState("");
 
   const [loginUser] = useLoginUserMutation();
@@ -33,6 +33,7 @@ const Login = () => {
       setLoginError("Incorrect email or password");
     } else {
       setCurrentUser(result.data)
+      setCurrentUserId(result.data._id)
       push("/");
     }
   };

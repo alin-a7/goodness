@@ -10,8 +10,8 @@ import { useState } from "react";
 
 export const useTodo = ({ text, isDone, authorId, _id }: TodoProps) => {
   const [showComments, setShowComments] = useState(false);
-  const { currentUser } = useAppSelector((store) => store.app);
-  const isAuthor = currentUser._id === authorId[0];
+  const { currentUser, currentUserId } = useAppSelector((store) => store.app);
+  const isAuthor = currentUserId === authorId[0];
 
   const changeShow = () => {
     setShowComments((prev) => !prev);
